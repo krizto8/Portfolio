@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harikrishnan S S - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: #0a0a0a;
+            position: relative;
+        }        /* Matrix Binary Rain Background */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, rgba(246, 226, 127, 0.02) 0%, transparent 70%);
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            line-height: 1.4;
+            opacity: 0.9;
+            animation: matrixFall linear infinite;
+            text-shadow: 0 0 10px currentColor;
+            filter: blur(0.3px);
+        }
+
+        @keyframes matrixFall {
+            0% {
+                transform: translateY(-150px);
+                opacity: 1;
+            }
+            10% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(calc(100vh + 150px));
+                opacity: 0;
+            }
+        }
+
+        .matrix-char {
+            display: block;
+            color: #f6e27f;
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .matrix-char.bright {
+            color: #ffffff;
+            text-shadow: 0 0 15px #f6e27f, 0 0 25px #c58a1b, 0 0 35px rgba(246, 226, 127, 0.5);
+            font-weight: 600;
+        }
+
+        .matrix-char.dim {
+            color: #c58a1b;
+            opacity: 0.4;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid;
+            border-image: linear-gradient(to bottom, #f6e27f, #c58a1b) 1;
+            box-shadow: 0 2px 20px rgba(246, 226, 127, 0.2);
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 2px 30px rgba(246, 226, 127, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            text-shadow: 0 0 10px rgba(246, 226, 127, 0.5);
+        }
+
+        .logo::after {
+            content: '_';
+            animation: cursorBlink 1s infinite;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            color: #000000;
+            transform: translateY(-2px);
+        }        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: transparent;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(246, 226, 127, 0.05) 50%, transparent 70%);
+            animation: techScan 6s ease-in-out infinite;
+            z-index: 3;
+        }
+
+        @keyframes techScan {
+            0%, 100% { opacity: 0; transform: translateX(-100%); }
+            50% { opacity: 1; transform: translateX(100%); }
+        }        .hero-content {
+            position: relative;
+            z-index: 4;
+        }.hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(246, 226, 127, 0.5);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            background: linear-gradient(to bottom, #f6e27f 30%, #c58a1b 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.1rem;
+        }        .btn-primary {
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            color: #000000;
+            box-shadow: 0 4px 15px rgba(246, 226, 127, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 226, 127, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #f6e27f;
+            border: 2px solid;
+            border-image: linear-gradient(to bottom, #f6e27f, #c58a1b) 1;
+            box-shadow: 0 4px 15px rgba(246, 226, 127, 0.2);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(246, 226, 127, 0.4);
+        }        /* Sections */
+        section {
+            padding: 100px 0;
+            background: rgba(10, 10, 10, 0.75);
+            position: relative;
+        }
+
+        /* Dark overlay for better content visibility */
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.7) 0%, 
+                rgba(10, 10, 10, 0.8) 50%, 
+                rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Ensure content is above the overlay */
+        section .container {
+            position: relative;
+            z-index: 2;
+        }.section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 4rem;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            text-shadow: 0 0 15px rgba(246, 226, 127, 0.3);
+        }
+
+        .section-title::before {
+            content: '> ';
+            background: linear-gradient(to bottom, #f6e27f 30%, #c58a1b 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title::after {
+            content: ' _';
+            animation: cursorBlink 1s infinite;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }        /* About Section */
+        .about {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(17, 17, 17, 0.85) 50%, rgba(10, 10, 10, 0.8) 100%);
+            position: relative;
+        }        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(246, 226, 127, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(197, 138, 27, 0.05) 0%, transparent 50%);
+            z-index: 2;
+        }        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+        }        /* Notepad App Layout */
+        .about-text {
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 8px;
+            padding: 0;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 0 20px rgba(246, 226, 127, 0.3);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .about-text:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(246, 226, 127, 0.4);
+        }
+
+        .notepad-header {
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            color: #000000;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .notepad-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notepad-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .notepad-button {
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .notepad-minimize {
+            background: #ffbd2e;
+        }
+
+        .notepad-maximize {
+            background: #28ca42;
+        }
+
+        .notepad-close {
+            background: #ff5f56;
+        }
+
+        .notepad-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .notepad-content {
+            background: linear-gradient(to bottom, #fefefe 0%, #f8f8f8 100%);
+            color: #333333;
+            padding: 2rem;
+            min-height: 200px;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .notepad-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 3rem;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff6b6b, #ffa500, #ffed4e, #51cf66, #339af0, #845ef7);
+            opacity: 0.3;
+        }
+
+        .notepad-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    transparent,
+                    transparent 1.7rem,
+                    rgba(0, 0, 0, 0.05) 1.7rem,
+                    rgba(0, 0, 0, 0.05) calc(1.7rem + 1px)
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .about-text p {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }        /* Notepad text selection and cursor effects */
+        .notepad-selected {
+            background: linear-gradient(135deg, rgba(246, 226, 127, 0.4), rgba(197, 138, 27, 0.4));
+            color: #000000;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-weight: 600;
+            box-shadow: 0 0 8px rgba(246, 226, 127, 0.3);
+            border: 1px solid rgba(246, 226, 127, 0.5);
+        }
+
+        .notepad-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: #333333;
+            animation: notepadBlink 1s infinite;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes notepadBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }        .stats {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }.stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(246, 226, 127, 0.3);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(246, 226, 127, 0.1), rgba(197, 138, 27, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-item:hover::before {
+            opacity: 1;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            border-color: #f6e27f;
+            box-shadow: 0 20px 40px rgba(246, 226, 127, 0.25);
+        }        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+            font-family: 'JetBrains Mono', monospace;
+        }        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            z-index: 2;
+            margin-top: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }        /* Stat Icons */
+        .stat-icon-bg {
+            position: absolute;
+            bottom: -40px;
+            left: -40px;
+            font-size: 8rem;
+            color: #c58a1b;
+            opacity: 0.1;
+            z-index: 0;
+            transform: rotate(-20deg);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-icon-bg {
+            transform: rotate(-15deg) scale(1.05);
+            opacity: 0.15;
+        }/* Tech Stack Terminal Layout */
+        .tech-terminal {
+            background: #000000;
+            border-radius: 8px;
+            padding: 0;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 0 20px rgba(246, 226, 127, 0.3);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            color: #000000;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f6e27f, #c58a1b);
+            box-shadow: 0 0 5px rgba(246, 226, 127, 0.3);
+        }        .terminal-content {
+            padding: 1.5rem;
+            background: #000000;
+            color: #f6e27f;
+            min-height: 300px;
+        }
+
+        .terminal-line {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .terminal-prompt {
+            background: linear-gradient(to bottom, #f6e27f 30%, #c58a1b 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: 0.5rem;
+        }
+
+        .terminal-command {
+            color: #ffffff;
+        }
+
+        .terminal-output {
+            color: #f6e27f;
+            margin-left: 2rem;
+        }        /* Tech Stack Grid Layout */
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 2rem 0;
+        }
+
+        .tech-tool {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tech-tool .tech-icon {
+            width: 48px;
+            height: 48px;
+            font-size: 48px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #f6e27f;
+            text-align: center;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tool:hover {
+            transform: translateY(-10px);
+        }
+
+        .tech-tool:hover .tech-icon {
+            transform: scale(1.2);
+            filter: brightness(1.3) drop-shadow(0 0 10px rgba(246, 226, 127, 0.8));
+        }
+
+        .tech-tool:hover .tech-name {
+            opacity: 1;
+            color: #ffffff;
+            transform: translateY(-5px);
+        }        /* Technology-specific colors with golden theme */
+        .tech-python { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-cpp { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-java { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-javascript { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-sql { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-mongodb { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-mysql { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-postgresql { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-redis { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-react { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-nodejs { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-express { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-docker { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-git { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-linux { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-sklearn { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-pandas { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-numpy { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+        .tech-opencv { color: #f6e27f; filter: drop-shadow(0 0 3px rgba(246, 226, 127, 0.5)); }
+        .tech-postman { color: #c58a1b; filter: drop-shadow(0 0 3px rgba(197, 138, 27, 0.5)); }
+
+        /* Responsive adjustments for tech stack */
+        @media (max-width: 768px) {
+            .tech-stack-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .tech-tool .tech-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 36px;
+            }
+            
+            .tech-name {
+                font-size: 0.8rem;
+            }
+        }        /* Experience Section */
+        .experience {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(17, 17, 17, 0.85) 50%, rgba(10, 10, 10, 0.8) 100%);
+            position: relative;
+        }        .experience::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(197, 138, 27, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(246, 226, 127, 0.05) 0%, transparent 50%);
+            z-index: 2;
+        }
+
+        .experience-item {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(246, 226, 127, 0.3);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(246, 226, 127, 0.1), rgba(197, 138, 27, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .experience-item:hover::before {
+            opacity: 1;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-10px);
+            border-color: #f6e27f;
+            box-shadow: 0 20px 40px rgba(246, 226, 127, 0.25);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }        .experience-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .experience-company {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }        .experience-duration {
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            color: #000000;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(246, 226, 127, 0.4);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .experience-points {
+            list-style: none;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .experience-points li {
+            padding: 0.7rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }        .experience-points li::before {
+            content: '> ';
+            position: absolute;
+            left: 0;
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+        }        .project-card {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(246, 226, 127, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+        }        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(246, 226, 127, 0.1), rgba(197, 138, 27, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            border-color: #f6e27f;
+            box-shadow: 0 25px 50px rgba(246, 226, 127, 0.4);
+        }
+
+        .project-header {
+            background: linear-gradient(to bottom, #f6e27f 0%, #c58a1b 100%);
+            color: #000000;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-duration {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }        .tech-tag {
+            background: rgba(246, 226, 127, 0.2);
+            color: #f6e27f;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(246, 226, 127, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(246, 226, 127, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tech-tag:hover::before {
+            opacity: 1;
+        }        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(17, 17, 17, 0.85) 50%, rgba(0, 0, 0, 0.8) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(246, 226, 127, 0.1) 0%, transparent 70%);
+            z-index: 2;
+        }        .contact-content {
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(246, 226, 127, 0.3);
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(246, 226, 127, 0.2), rgba(197, 138, 27, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-item:hover::before {
+            opacity: 1;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: #f6e27f;
+            box-shadow: 0 10px 30px rgba(246, 226, 127, 0.4);
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.8;
+        }        .contact-item i {
+            background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced Texture and Lighting Effects */
+        .texture-overlay {
+            position: relative;
+        }
+
+        .texture-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(246, 226, 127, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(197, 138, 27, 0.08) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(246, 226, 127, 0.02) 2px, rgba(246, 226, 127, 0.02) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(197, 138, 27, 0.01) 2px, rgba(197, 138, 27, 0.01) 4px);
+            pointer-events: none;
+            opacity: 0.6;
+            mix-blend-mode: screen;
+        }
+
+        .golden-shimmer {
+            background: linear-gradient(45deg, 
+                #f6e27f 0%, 
+                #fff3a0 25%, 
+                #c58a1b 50%, 
+                #f6e27f 75%, 
+                #c58a1b 100%);
+            background-size: 200% 200%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Apply texture to key elements */
+        .hero, .about, .experience, .contact {
+            position: relative;
+        }
+
+        .hero::after, .about::after, .experience::after, .contact::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(246, 226, 127, 0.01) 100px, rgba(246, 226, 127, 0.01) 102px),
+                repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(197, 138, 27, 0.005) 100px, rgba(197, 138, 27, 0.005) 102px);
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: overlay;
+        }
+
+        /* Enhanced button with golden texture */
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 2;
+        }        /* Enhanced Terminal Buttons with Golden Theme */
+        .terminal-button {
+            background: linear-gradient(135deg, #ff4444, #cc2222);
+            box-shadow: 0 0 8px rgba(255, 68, 68, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
+        .terminal-button:nth-child(1) {
+            background: linear-gradient(135deg, #ff4444, #cc2222);
+            box-shadow: 0 0 8px rgba(255, 68, 68, 0.4);
+        }
+
+        .terminal-button:nth-child(2) {
+            background: linear-gradient(135deg, #ffcc00, #e6b800);
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
+        }
+
+        .terminal-button:nth-child(3) {
+            background: linear-gradient(135deg, #44ff44, #22cc22);
+            box-shadow: 0 0 8px rgba(68, 255, 68, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(246, 226, 127, 0.5);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(246, 226, 127, 0.8), 0 0 30px rgba(246, 226, 127, 0.6);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .glow-animation {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Binary Rain Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="texture-overlay">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo console-font">portfolio</div>
+                <ul class="nav-links">
+                    <li><a href="#home">./home</a></li>
+                    <li><a href="#about">./about</a></li>
+                    <li><a href="#skills">./skills</a></li>
+                    <li><a href="#experience">./experience</a></li>
+                    <li><a href="#projects">./projects</a></li>
+                    <li><a href="#contact">./contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav><!-- Hero Section -->
+    <section id="home" class="hero texture-overlay">
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="heroTitle" class="golden-shimmer">harikrishnan_ss</h1>
+                <p class="subtitle console-font">$ whoami >> Full Stack Developer</p>
+                <p class="description">Building innovative solutions with modern technologies. Currently pursuing B.Tech in CSE at IIIT Gwalior with a passion for Machine learning and Web development.</p>                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary texture-overlay metallic-texture">
+                        <i class="fas fa-terminal"></i> view_projects()
+                    </a>                    <a href="#" class="btn btn-secondary texture-overlay metallic-texture" id="rainButton">
+                        <i class="fas fa-cloud-rain"></i> See the rain
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- About Section -->
+    <section id="about" class="about texture-overlay">
+        <div class="container">
+            <h2 class="section-title fade-in">about_me</h2>
+            <div class="about-content">
+                <div class="about-text slide-left">
+                    <div class="notepad-header">
+                        <div class="notepad-title">
+                            <span>📄</span>
+                            <span>about_me.txt</span>
+                        </div>
+                        <div class="notepad-controls">
+                            <div class="notepad-button notepad-minimize">−</div>
+                            <div class="notepad-button notepad-maximize">□</div>
+                            <div class="notepad-button notepad-close">×</div>
+                        </div>
+                    </div>                    <div class="notepad-content">
+                        <p>I'm a <span class="notepad-selected">Computer Science student</span> with a strong foundation in <span class="notepad-selected">full-stack development</span> and <span class="notepad-selected">machine learning</span>. My passion lies in building software that's not only functional and scalable but also solves <span class="notepad-selected">real-world problems</span> in meaningful ways. I've worked on projects like web applications to apps that leverage predictive models—to deepen my understanding across multiple domains of computer science.</p>
+                        <p>I thrive at the intersection of <span class="notepad-selected">development and problem-solving</span>, and I'm always curious to explore new technologies, frameworks, and ideas. Whether it's designing <span class="notepad-selected">intuitive user interfaces</span> or optimizing <span class="notepad-selected">backend performance</span>, I enjoy the process of turning ideas into <span class="notepad-selected">impactful digital solutions</span>.<span class="notepad-cursor"></span></p>
+                    </div>
+                </div>                <div class="stats slide-right">
+                    <div class="stat-item texture-overlay float-animation">
+                        <div class="stat-icon-bg">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="stat-number">MERN</div>
+                        <div class="stat-label">Web Development</div>
+                    </div>
+                    <div class="stat-item texture-overlay float-animation">
+                        <div class="stat-icon-bg">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="stat-number">Python</div>
+                        <div class="stat-label">Machine Learning</div>
+                    </div>
+                    <div class="stat-item texture-overlay float-animation">
+                        <div class="stat-icon-bg">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-number">DSA</div>
+                        <div class="stat-label">Data Structures and Algorithms</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Skills Section -->
+    <section id="skills" class="texture-overlay">
+        <div class="container">
+            <h2 class="section-title fade-in">tech_stack</h2>
+              <!-- Terminal Style Display -->
+            <div class="tech-terminal texture-overlay metallic-texture fade-in">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <div class="terminal-button"></div>
+                        <div class="terminal-button"></div>
+                        <div class="terminal-button"></div>
+                    </div>
+                    <span>harikrishnan@portfolio:~$ cat tech_stack.json</span>
+                </div>
+                <div class="terminal-content" id="terminalContent">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>            <!-- Tech Stack Grid -->
+            <div class="tech-stack-grid">
+                <div class="tech-tool fade-in">
+                    <i class="fab fa-python tech-icon tech-python"></i>
+                    <span class="tech-name">Python</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-code tech-icon tech-cpp"></i>
+                    <span class="tech-name">C/C++</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fab fa-java tech-icon tech-java"></i>
+                    <span class="tech-name">Java</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fab fa-js-square tech-icon tech-javascript"></i>
+                    <span class="tech-name">JavaScript</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-leaf tech-icon tech-mongodb"></i>
+                    <span class="tech-name">MongoDB</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-database tech-icon tech-mysql"></i>
+                    <span class="tech-name">MySQL</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-elephant tech-icon tech-postgresql"></i>
+                    <span class="tech-name">PostgreSQL</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-cube tech-icon tech-redis"></i>
+                    <span class="tech-name">Redis</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fab fa-react tech-icon tech-react"></i>
+                    <span class="tech-name">React.js</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fab fa-node-js tech-icon tech-nodejs"></i>
+                    <span class="tech-name">Node.js</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-server tech-icon tech-express"></i>
+                    <span class="tech-name">Express.js</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fab fa-docker tech-icon tech-docker"></i>
+                    <span class="tech-name">Docker</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fab fa-git-alt tech-icon tech-git"></i>
+                    <span class="tech-name">Git</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fab fa-linux tech-icon tech-linux"></i>
+                    <span class="tech-name">Linux</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-chart-line tech-icon tech-sklearn"></i>
+                    <span class="tech-name">scikit-learn</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-table tech-icon tech-pandas"></i>
+                    <span class="tech-name">Pandas</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-calculator tech-icon tech-numpy"></i>
+                    <span class="tech-name">NumPy</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-eye tech-icon tech-opencv"></i>
+                    <span class="tech-name">OpenCV</span>
+                </div>
+                <div class="tech-tool fade-in">
+                    <i class="fas fa-paper-plane tech-icon tech-postman"></i>
+                    <span class="tech-name">Postman</span>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Experience Section -->
+    <section id="experience" class="experience texture-overlay">
+        <div class="container">
+            <h2 class="section-title fade-in">experience</h2>
+            <div class="experience-item texture-overlay fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Full Stack Developer Intern</div>
+                        <div class="experience-company">JitTec Solutions, Trivandrum, Kerala</div>
+                    </div>
+                    <div class="experience-duration">Ongoing</div>
+                </div>
+                <ul class="experience-points">
+                    <li>Building a modular full-stack Course Management platform using React and Node.js</li>
+                    <li>Designing RESTful APIs with Express and developed optimized MongoDB schema to handle Course and User data</li>
+                    <li>Supporting 500+ users and managing 10,000+ quiz records</li>
+                    <li>Improved content load times through optimized data retrieval</li>
+                </ul>
+            </div>
+        </div>
+    </section>    <!-- Projects Section -->
+    <section id="projects" class="texture-overlay">
+        <div class="container">
+            <h2 class="section-title fade-in">featured_projects</h2>
+            <div class="projects-grid">
+                <div class="project-card texture-overlay fade-in">
+                    <div class="project-header">
+                        <div class="project-title">Intrusion Detection System</div>
+                        <div class="project-duration">May 2024 – July 2024</div>
+                    </div>
+                    <div class="project-content">                        <div class="project-tech">
+                            <span class="tech-tag golden-glow">React</span>
+                            <span class="tech-tag golden-glow">Node.js</span>
+                            <span class="tech-tag golden-glow">Python</span>
+                            <span class="tech-tag golden-glow">Flask</span>
+                            <span class="tech-tag golden-glow">MongoDB</span>
+                            <span class="tech-tag golden-glow">Chart.js</span>
+                        </div>
+                        <ul class="experience-points">
+                            <li>Designed a real-time IDS system integrating ML and Computer Networking</li>
+                            <li>Captured and parsed live traffic data using Python and TCP/IP stack</li>
+                            <li>Trained Random Forest on CICIDS 2018 dataset with 99% accuracy</li>
+                            <li>Visualized predictions using Chart.js, reducing debugging time by 25%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card texture-overlay fade-in">
+                    <div class="project-header">
+                        <div class="project-title">Football Analytics via Computer Vision</div>
+                        <div class="project-duration">Nov 2024 – Jan 2025</div>
+                    </div>
+                    <div class="project-content">                        <div class="project-tech">
+                            <span class="tech-tag golden-glow">Python</span>
+                            <span class="tech-tag golden-glow">OpenCV</span>
+                            <span class="tech-tag golden-glow">YOLO</span>
+                            <span class="tech-tag golden-glow">K-Means</span>
+                            <span class="tech-tag golden-glow">Optical Flow</span>
+                        </div>
+                        <ul class="experience-points">
+                            <li>Built real-time football player detection and tracking system</li>
+                            <li>Used YOLO for accurate player detection with high-speed inference</li>
+                            <li>Applied K-Means clustering for jersey color segmentation with 95% precision</li>
+                            <li>Implemented Optical Flow for camera movement compensation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card texture-overlay fade-in">
+                    <div class="project-header">
+                        <div class="project-title">LiveSpace - Real Estate App</div>
+                        <div class="project-duration">May 2023 – July 2023</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tech">
+                            <span class="tech-tag golden-glow">React</span>
+                            <span class="tech-tag golden-glow">Node.js</span>
+                            <span class="tech-tag golden-glow">MongoDB</span>
+                            <span class="tech-tag golden-glow">Leaflet.js</span>
+                            <span class="tech-tag golden-glow">Prisma</span>
+                            <span class="tech-tag golden-glow">SCSS</span>
+                        </div>
+                        <ul class="experience-points">
+                            <li>Developed end-to-end real estate platform with map-based listings and interactive UI</li>
+                            <li>Implemented Leaflet.js to display properties with accurate real-world geolocation on maps</li>
+                            <li>Used Prisma ORM and MongoDB Atlas for scalable backend services and user data storage</li>
+                            <li>Improved user session duration by 30% through intuitive design and fast-loading pages</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Contact Section -->
+    <section id="contact" class="contact texture-overlay">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title fade-in" style="color: white;">connect</h2>
+                <p class="fade-in" style="font-size: 1.2rem; margin-bottom: 2rem; font-family: 'JetBrains Mono', monospace;">$ echo "Always open to discussing new opportunities and exciting projects!"</p>                <div class="contact-info fade-in">
+                    <div class="contact-item texture-overlay">
+                        <i class="fas fa-file-pdf"></i>
+                        <a href="Resume 1.pdf" target="_blank">View Resume</a>
+                    </div>
+                    <div class="contact-item texture-overlay">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:ssharikrishnan8@gmail.com">ssharikrishnan8@gmail.com</a>
+                    </div>
+                    <div class="contact-item texture-overlay">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://linkedin.com/in/harikrishnanss08/" target="_blank">LinkedIn</a>
+                    </div>
+                    <div class="contact-item texture-overlay">
+                        <i class="fab fa-github"></i>
+                        <a href="https://github.com/krizto8" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <script>
+        // Matrix Binary Rain Effect
+        function createMatrixEffect() {
+            const matrixBg = document.getElementById('matrixBg');
+            const columns = Math.floor(window.innerWidth / 25);
+            
+            // Clear existing columns
+            matrixBg.innerHTML = '';
+            
+            for (let i = 0; i < columns; i++) {
+                createMatrixColumn(i * 25);
+            }
+        }
+        
+        function createMatrixColumn(leftPosition) {
+            const column = document.createElement('div');
+            column.className = 'matrix-column';
+            column.style.left = leftPosition + 'px';
+            
+            // Random number of characters in each column (10-25)
+            const charCount = Math.floor(Math.random() * 15) + 10;
+            
+            for (let i = 0; i < charCount; i++) {
+                const char = document.createElement('span');
+                char.className = 'matrix-char';
+                char.textContent = Math.random() > 0.5 ? '1' : '0';
+                
+                // Add random styling variations
+                const random = Math.random();
+                if (random > 0.8) {
+                    char.classList.add('bright');
+                } else if (random < 0.3) {
+                    char.classList.add('dim');
+                }
+                
+                column.appendChild(char);
+            }
+            
+            // Random animation duration (8-15 seconds)
+            const duration = Math.random() * 7 + 8;
+            column.style.animationDuration = duration + 's';
+            
+            // Random delay before starting (0-5 seconds)
+            const delay = Math.random() * 5;
+            column.style.animationDelay = delay + 's';
+            
+            document.getElementById('matrixBg').appendChild(column);
+            
+            // Change characters randomly during animation
+            setInterval(() => {
+                const chars = column.querySelectorAll('.matrix-char');
+                chars.forEach(char => {
+                    if (Math.random() > 0.95) {
+                        char.textContent = Math.random() > 0.5 ? '1' : '0';
+                        
+                        // Randomly change styling
+                        char.className = 'matrix-char';
+                        const random = Math.random();
+                        if (random > 0.85) {
+                            char.classList.add('bright');
+                        } else if (random < 0.2) {
+                            char.classList.add('dim');
+                        }
+                    }
+                });
+            }, 150);
+            
+            // Recreate column when animation ends
+            setTimeout(() => {
+                if (column.parentNode) {
+                    column.remove();
+                    createMatrixColumn(leftPosition);
+                }
+            }, (duration + delay) * 1000);
+        }
+        
+        // Initialize matrix effect
+        createMatrixEffect();
+        
+        // Recreate matrix on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(createMatrixEffect, 300);
+        });
+        // Enhanced typing effect with cursor
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            const cursor = '<span class="typing-cursor">_</span>';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML = text.substring(0, i + 1) + cursor;
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Keep cursor blinking after typing is complete
+                    element.innerHTML = text + '<span class="console-cursor">_</span>';
+                }
+            }
+            type();
+        }        // Terminal typing animation for tech stack with character-by-character typing
+        function animateTerminalContent() {
+            const terminalContent = document.getElementById('terminalContent');
+            const lines = [
+                { prompt: '$', command: 'cat tech_stack.json', delay: 500, typeSpeed: 50 },
+                { output: '{', delay: 300, typeSpeed: 100 },
+                { output: '  "languages": ["Python", "JavaScript", "C++", "Java", "SQL"],', delay: 100, typeSpeed: 25 },
+                { output: '  "frameworks": ["React.js", "Node.js", "Express.js"],', delay: 100, typeSpeed: 25 },
+                { output: '  "databases": ["MongoDB", "MySQL", "PostgreSQL", "Redis"],', delay: 100, typeSpeed: 25 },
+                { output: '  "tools": ["Docker", "Git", "Linux", "Postman"],', delay: 100, typeSpeed: 25 },
+                { output: '  "ml_libraries": ["scikit-learn", "Pandas", "NumPy", "OpenCV", "YOLO"]', delay: 100, typeSpeed: 25 },
+                { output: '}', delay: 300, typeSpeed: 100 },
+                { prompt: '$', command: 'ls -la skills/', delay: 800, typeSpeed: 50 }
+            ];
+            
+            terminalContent.innerHTML = '';
+            let currentLine = 0;
+            
+            function typeLineCharByChar(element, text, speed, isPrompt = false) {
+                return new Promise((resolve) => {
+                    let i = 0;
+                    const cursor = '<span class="typing-cursor">_</span>';
+                    
+                    function typeChar() {
+                        if (i < text.length) {
+                            if (isPrompt) {
+                                element.innerHTML = `<span class="terminal-prompt">${text.substring(0, i + 1)}</span>${cursor}`;
+                            } else {
+                                element.innerHTML = `<span class="terminal-output">${text.substring(0, i + 1)}</span>${cursor}`;
+                            }
+                            i++;
+                            setTimeout(typeChar, speed);
+                        } else {
+                            // Remove cursor and show final text
+                            if (isPrompt) {
+                                element.innerHTML = `<span class="terminal-prompt">${text}</span>`;
+                            } else {
+                                element.innerHTML = `<span class="terminal-output">${text}</span>`;
+                            }
+                            resolve();
+                        }
+                    }
+                    
+                    typeChar();
+                });
+            }
+            
+            function typePromptAndCommand(element, prompt, command, speed) {
+                return new Promise((resolve) => {
+                    let i = 0;
+                    const fullPrompt = prompt;
+                    const cursor = '<span class="typing-cursor">_</span>';
+                    
+                    // First type the prompt
+                    function typePrompt() {
+                        if (i < fullPrompt.length) {
+                            element.innerHTML = `<span class="terminal-prompt">${fullPrompt.substring(0, i + 1)}</span>${cursor}`;
+                            i++;
+                            setTimeout(typePrompt, speed);
+                        } else {
+                            // Add space and start typing command
+                            element.innerHTML = `<span class="terminal-prompt">${fullPrompt}</span> ${cursor}`;
+                            setTimeout(typeCommand, 100);
+                        }
+                    }
+                    
+                    // Then type the command
+                    let j = 0;
+                    function typeCommand() {
+                        if (j < command.length) {
+                            element.innerHTML = `<span class="terminal-prompt">${fullPrompt}</span> <span class="terminal-command">${command.substring(0, j + 1)}</span>${cursor}`;
+                            j++;
+                            setTimeout(typeCommand, speed);
+                        } else {
+                            // Remove cursor and show final result
+                            element.innerHTML = `<span class="terminal-prompt">${fullPrompt}</span> <span class="terminal-command">${command}</span>`;
+                            resolve();
+                        }
+                    }
+                    
+                    typePrompt();
+                });
+            }
+            
+            async function typeNextLine() {
+                if (currentLine < lines.length) {
+                    const line = lines[currentLine];
+                    const lineDiv = document.createElement('div');
+                    lineDiv.className = 'terminal-line';
+                    terminalContent.appendChild(lineDiv);
+                    
+                    // Wait for the initial delay
+                    await new Promise(resolve => setTimeout(resolve, line.delay));
+                    
+                    if (line.prompt) {
+                        await typePromptAndCommand(lineDiv, line.prompt, line.command, line.typeSpeed);
+                    } else {
+                        await typeLineCharByChar(lineDiv, line.output, line.typeSpeed);
+                    }
+                    
+                    currentLine++;
+                    await typeNextLine();
+                } else {
+                    // Add blinking cursor at the end
+                    setTimeout(() => {
+                        const cursorLine = document.createElement('div');
+                        cursorLine.className = 'terminal-line';
+                        cursorLine.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-cursor">_</span>';
+                        terminalContent.appendChild(cursorLine);
+                    }, 500);
+                }
+            }
+            
+            typeNextLine();
+        }
+
+        // Add CSS for enhanced terminal effects
+        const enhancedStyle = document.createElement('style');
+        enhancedStyle.textContent = `            .typing-cursor, .console-cursor, .terminal-cursor {
+                animation: terminalBlink 1s infinite;
+                background: linear-gradient(to bottom, #f6e27f, #c58a1b);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            @keyframes terminalBlink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+            .terminal-line {
+                opacity: 0;
+                animation: terminalFadeIn 0.3s ease forwards;
+            }
+            @keyframes terminalFadeIn {
+                from { opacity: 0; transform: translateX(-10px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(enhancedStyle);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Enhanced Intersection Observer for multiple animation types
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger terminal animation for tech stack section
+                    if (entry.target.closest('#skills') && entry.target.classList.contains('tech-terminal')) {
+                        setTimeout(() => animateTerminalContent(), 500);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-left, .slide-right, .tech-terminal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize typing effect after page load
+        window.addEventListener('load', function() {
+            const heroTitle = document.querySelector('#heroTitle');
+            const originalText = 'harikrishnan_ss';
+              // Clear the title and start typing effect
+            heroTitle.innerHTML = '';
+            setTimeout(() => {
+                typeWriter(heroTitle, originalText, 80);
+            }, 1000);
+        });
+
+        // Add hover effects for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });        // Add glow effect to buttons on hover
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.classList.add('glow-animation');
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.classList.remove('glow-animation');
+            });
+        });        // Rain effect functionality
+        let isRainMode = false;
+        const rainButton = document.getElementById('rainButton');
+        const allContent = document.querySelectorAll('section');
+        
+        function toggleRainMode() {
+            isRainMode = !isRainMode;
+            
+            if (isRainMode) {
+                // Hide all content except background and navbar
+                allContent.forEach(element => {
+                    element.style.opacity = '0';
+                    element.style.pointerEvents = 'none';
+                });
+                  // Keep only the matrix background visible
+                document.getElementById('matrixBg').style.zIndex = '1000';
+                
+                // Ensure navbar stays visible and functional
+                const navbar = document.getElementById('navbar');
+                navbar.style.opacity = '1';
+                navbar.style.pointerEvents = 'auto';
+                navbar.style.zIndex = '1001';
+                
+                // Add a subtle overlay to make the rain more visible
+                const rainOverlay = document.createElement('div');
+                rainOverlay.id = 'rainOverlay';
+                rainOverlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.3);
+                    z-index: 999;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(rainOverlay);
+                  // Change button text
+                rainButton.innerHTML = '<i class="fas fa-eye"></i> Back to portfolio';
+                rainButton.style.position = 'fixed';
+                rainButton.style.top = '80px';
+                rainButton.style.right = '20px';
+                rainButton.style.zIndex = '1001';
+                rainButton.style.opacity = '1';
+                rainButton.style.pointerEvents = 'auto';
+                
+            } else {
+                // Show all content
+                allContent.forEach(element => {
+                    element.style.opacity = '1';
+                    element.style.pointerEvents = 'auto';
+                });
+                
+                // Reset matrix background z-index
+                document.getElementById('matrixBg').style.zIndex = '-1';
+                
+                // Remove rain overlay
+                const rainOverlay = document.getElementById('rainOverlay');
+                if (rainOverlay) {
+                    rainOverlay.remove();
+                }
+                
+                // Reset button
+                rainButton.innerHTML = '<i class="fas fa-cloud-rain"></i> See the rain';
+                rainButton.style.position = 'relative';
+                rainButton.style.top = 'auto';
+                rainButton.style.right = 'auto';
+                rainButton.style.zIndex = 'auto';
+            }
+        }
+        
+        // Add click event to rain button
+        rainButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleRainMode();
+        });
+        
+        // Add click event to document for returning from rain mode
+        document.addEventListener('click', function(e) {
+            if (isRainMode && e.target !== rainButton && !rainButton.contains(e.target)) {
+                toggleRainMode();
+            }
+        });
+    </script>
+</body>
+</html>
