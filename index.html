@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harikrishnan S S - Portfolio</title>
+      <!-- Terminal Icon Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23f6e27f'/%3E%3Ccircle cx='50' cy='50' r='40' fill='%230a0a0a'/%3E%3Cpath d='M25 35 L40 50 L25 65' stroke='%23f6e27f' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='45' y='57' width='25' height='6' fill='%23f6e27f' rx='3'/%3E%3C/svg%3E">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -2047,11 +2050,12 @@
         // Theme Switching Functionality
         const themeBtn = document.getElementById('themeBtn');
         const themeDropdown = document.getElementById('themeDropdown');
-        const themeOptions = document.querySelectorAll('.theme-option');
-
-        // Load saved theme from localStorage
+        const themeOptions = document.querySelectorAll('.theme-option');        // Load saved theme from localStorage
         const savedTheme = localStorage.getItem('portfolioTheme') || 'gold';
         document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // Initialize favicon with the current theme
+        updateFavicon();
 
         // Toggle theme dropdown
         themeBtn.addEventListener('click', (e) => {
@@ -2064,9 +2068,7 @@
             if (!themeBtn.contains(e.target) && !themeDropdown.contains(e.target)) {
                 themeDropdown.classList.remove('active');
             }
-        });
-
-        // Handle theme selection
+        });        // Handle theme selection
         themeOptions.forEach(option => {
             option.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -2084,15 +2086,16 @@
                 // Update matrix colors with new theme
                 updateMatrixColors();
                 
+                // Update favicon with new theme colors
+                updateFavicon();
+                
                 // Add a subtle animation to indicate theme change
                 document.body.style.transition = 'all 0.5s ease';
                 setTimeout(() => {
                     document.body.style.transition = '';
                 }, 500);
             });
-        });
-
-        // Function to update matrix colors when theme changes
+        });// Function to update matrix colors when theme changes
         function updateMatrixColors() {
             const matrixChars = document.querySelectorAll('.matrix-char');
             matrixChars.forEach(char => {
@@ -2101,6 +2104,59 @@
                 char.offsetHeight; // Trigger reflow
                 char.style.display = '';
             });
+        }
+
+        // Function to update favicon colors based on current theme
+        function updateFavicon() {
+            // Get the current theme's CSS custom properties
+            const computedStyle = getComputedStyle(document.documentElement);
+            const primaryColor = computedStyle.getPropertyValue('--primary-color').trim();
+            const bgPrimary = computedStyle.getPropertyValue('--bg-primary').trim();
+            
+            // Define theme color mapping (fallback in case CSS vars don't work)
+            const themeColors = {
+                'gold': { primary: '#f6e27f', bg: '#0a0a0a' },
+                'blue': { primary: '#64b5f6', bg: '#0a0a0a' },
+                'purple': { primary: '#ba68c8', bg: '#0a0a0a' },
+                'green': { primary: '#81c784', bg: '#0a0a0a' },
+                'red': { primary: '#e57373', bg: '#0a0a0a' },
+                'cyan': { primary: '#4dd0e1', bg: '#0a0a0a' }
+            };
+            
+            // Get current theme from document attribute
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'gold';
+            const colors = themeColors[currentTheme];
+            
+            // Use CSS custom property colors if available, otherwise fallback to theme mapping
+            const faviconPrimary = primaryColor || colors.primary;
+            const faviconBg = bgPrimary || colors.bg;
+            
+            // Create the dynamic SVG favicon with current theme colors
+            const faviconSvg = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="48" fill="${faviconPrimary}"/>
+                    <circle cx="50" cy="50" r="40" fill="${faviconBg}"/>
+                    <path d="M25 35 L40 50 L25 65" stroke="${faviconPrimary}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="45" y="57" width="25" height="6" fill="${faviconPrimary}" rx="3"/>
+                </svg>
+            `;
+            
+            // Encode the SVG for use in data URI
+            const encodedSvg = encodeURIComponent(faviconSvg.trim());
+            const faviconDataUri = `data:image/svg+xml,${encodedSvg}`;
+            
+            // Update the favicon
+            let faviconLink = document.querySelector('link[rel="icon"]');
+            if (faviconLink) {
+                faviconLink.href = faviconDataUri;
+            } else {
+                // Create favicon link if it doesn't exist
+                faviconLink = document.createElement('link');
+                faviconLink.rel = 'icon';
+                faviconLink.type = 'image/svg+xml';
+                faviconLink.href = faviconDataUri;
+                document.head.appendChild(faviconLink);
+            }
         }
 
         // Enhanced typing effect with cursor
