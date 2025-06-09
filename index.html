@@ -2177,8 +2177,21 @@
             }
             type();
         }        // Terminal typing animation for tech stack with character-by-character typing
+        let terminalAnimationCompleted = false;
+        let terminalTimeouts = []; // Array to store all timeout IDs
+        
         function animateTerminalContent() {
             const terminalContent = document.getElementById('terminalContent');
+            
+            // Check if animation has already been completed
+            if (terminalAnimationCompleted) {
+                return;
+            }
+            
+            // Clear any existing timeouts to prevent multiple animations
+            terminalTimeouts.forEach(timeout => clearTimeout(timeout));
+            terminalTimeouts = [];
+            
             const lines = [
                 { prompt: '$', command: 'cat tech_stack.json', delay: 500, typeSpeed: 50 },
                 { output: '{', delay: 300, typeSpeed: 100 },
@@ -2193,8 +2206,7 @@
             
             terminalContent.innerHTML = '';
             let currentLine = 0;
-            
-            function typeLineCharByChar(element, text, speed, isPrompt = false) {
+              function typeLineCharByChar(element, text, speed, isPrompt = false) {
                 return new Promise((resolve) => {
                     let i = 0;
                     const cursor = '<span class="typing-cursor">_</span>';
@@ -2207,7 +2219,8 @@
                                 element.innerHTML = `<span class="terminal-output">${text.substring(0, i + 1)}</span>${cursor}`;
                             }
                             i++;
-                            setTimeout(typeChar, speed);
+                            const timeoutId = setTimeout(typeChar, speed);
+                            terminalTimeouts.push(timeoutId);
                         } else {
                             // Remove cursor and show final text
                             if (isPrompt) {
@@ -2222,8 +2235,7 @@
                     typeChar();
                 });
             }
-            
-            function typePromptAndCommand(element, prompt, command, speed) {
+              function typePromptAndCommand(element, prompt, command, speed) {
                 return new Promise((resolve) => {
                     let i = 0;
                     const fullPrompt = prompt;
@@ -2234,11 +2246,13 @@
                         if (i < fullPrompt.length) {
                             element.innerHTML = `<span class="terminal-prompt">${fullPrompt.substring(0, i + 1)}</span>${cursor}`;
                             i++;
-                            setTimeout(typePrompt, speed);
+                            const timeoutId = setTimeout(typePrompt, speed);
+                            terminalTimeouts.push(timeoutId);
                         } else {
                             // Add space and start typing command
                             element.innerHTML = `<span class="terminal-prompt">${fullPrompt}</span> ${cursor}`;
-                            setTimeout(typeCommand, 100);
+                            const timeoutId = setTimeout(typeCommand, 100);
+                            terminalTimeouts.push(timeoutId);
                         }
                     }
                     
@@ -2248,7 +2262,8 @@
                         if (j < command.length) {
                             element.innerHTML = `<span class="terminal-prompt">${fullPrompt}</span> <span class="terminal-command">${command.substring(0, j + 1)}</span>${cursor}`;
                             j++;
-                            setTimeout(typeCommand, speed);
+                            const timeoutId = setTimeout(typeCommand, speed);
+                            terminalTimeouts.push(timeoutId);
                         } else {
                             // Remove cursor and show final result
                             element.innerHTML = `<span class="terminal-prompt">${fullPrompt}</span> <span class="terminal-command">${command}</span>`;
@@ -2259,8 +2274,7 @@
                     typePrompt();
                 });
             }
-            
-            async function typeNextLine() {
+              async function typeNextLine() {
                 if (currentLine < lines.length) {
                     const line = lines[currentLine];
                     const lineDiv = document.createElement('div');
@@ -2268,7 +2282,10 @@
                     terminalContent.appendChild(lineDiv);
                     
                     // Wait for the initial delay
-                    await new Promise(resolve => setTimeout(resolve, line.delay));
+                    await new Promise(resolve => {
+                        const timeoutId = setTimeout(resolve, line.delay);
+                        terminalTimeouts.push(timeoutId);
+                    });
                     
                     if (line.prompt) {
                         await typePromptAndCommand(lineDiv, line.prompt, line.command, line.typeSpeed);
@@ -2279,13 +2296,20 @@
                     currentLine++;
                     await typeNextLine();
                 } else {
-                    // Add blinking cursor at the end
-                    setTimeout(() => {
+                    // Add blinking cursor at the end and mark animation as completed
+                    const timeoutId = setTimeout(() => {
                         const cursorLine = document.createElement('div');
                         cursorLine.className = 'terminal-line';
                         cursorLine.innerHTML = '<span class="terminal-prompt">$</span><span class="terminal-cursor">_</span>';
                         terminalContent.appendChild(cursorLine);
+                        
+                        // Mark animation as completed
+                        terminalAnimationCompleted = true;
+                        
+                        // Clear the timeouts array as we're done
+                        terminalTimeouts = [];
                     }, 500);
+                    terminalTimeouts.push(timeoutId);
                 }
             }
             
@@ -2354,15 +2378,13 @@
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
+        };        const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                     
-                    // Trigger terminal animation for tech stack section
-                    if (entry.target.closest('#skills') && entry.target.classList.contains('tech-terminal')) {
+                    // Trigger terminal animation for tech stack section only once
+                    if (entry.target.closest('#skills') && entry.target.classList.contains('tech-terminal') && !terminalAnimationCompleted) {
                         setTimeout(() => animateTerminalContent(), 500);
                     }
                 }
