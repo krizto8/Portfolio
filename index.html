@@ -2210,6 +2210,29 @@
             <div class="projects-grid">
                 <div class="project-card texture-overlay fade-in">
                     <div class="project-header">
+                        <div class="project-title">SecureBox - Instant Encrypted File Sharing</div>
+                        <div class="project-duration">May 2025</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tech">
+                            <span class="tech-tag golden-glow">Python</span>
+                            <span class="tech-tag golden-glow">Redis</span>
+                            <span class="tech-tag golden-glow">Docker</span>
+                            <span class="tech-tag golden-glow">MinIO</span>
+                            <span class="tech-tag golden-glow">Celery</span>
+                            <span class="tech-tag golden-glow">PostgreSQL</span>
+                        </div>
+                        <ul class="experience-points">
+                            <li>Designed and developed a secure, cloud-native file-sharing platform optimized for high concurrency</li>
+                            <li>Architected a 4-tier microservices system (API Gateway, Encryption Service, Storage Service, Background Worker) with Docker Compose orchestration, health checks, and TLS-secured NGINX reverse proxy</li>
+                            <li>Built an asynchronous task system using Celery + Redis for tasks like file cleanup and usage statistics generation</li>
+                            <li>Integrated PostgreSQL (for metadata & logs) and MinIO (S3-compatible storage) with Redis caching to improve API throughput by up to 60%</li>
+                            <li>Configured full observability stack with Prometheus metrics, Grafana dashboards, and structured JSON logging; achieved zero-downtime deployments</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card texture-overlay fade-in">
+                    <div class="project-header">
                         <div class="project-title">Intrusion Detection System</div>
                         <div class="project-duration">May 2024 – July 2024</div>
                     </div>
@@ -3045,6 +3068,10 @@
                         'others': ['Prisma ORM', 'Chart.js', 'Leaflet.js']
                     }
                 },                'projects': {
+                    'securebox-file-sharing': {
+                        'name': 'SecureBox - Instant Encrypted File Sharing',
+                        'description': 'Secure, cloud-native file-sharing platform optimized for high concurrency'
+                    },
                     'intrusion-detection-system': {
                         'name': 'Intrusion Detection System',
                         'description': 'Real-time IDS system integrating ML and Computer Networking'
@@ -3245,7 +3272,7 @@
         function listDirectory(path) {
             const pathMap = {
                 'skills': 'languages/  frameworks/  tools/',
-                'projects': 'intrusion-detection-system/  football-analytics/  livespace-app/',
+                'projects': 'securebox-file-sharing/  intrusion-detection-system/  football-analytics/  livespace-app/',
                 'experience': 'jittec-solutions/',
                 'contact': 'email.txt  linkedin.url  github.url  resume.pdf'
             };
